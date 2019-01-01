@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>按键精灵命令库帮助</title>
+<style>
+body{font-size:15px; font-family:"宋体"}
+.ts{ background:#fff; margin:0 0 40px 0;}
+.ts th{ color:#7B797B; background:#DEDFDE; line-height:24px;}
+.ts td {padding:6px 0;}
+.name { font-size:16px; font-weight:bold; border-top:1px dashed #9C9A9C; border-bottom:1px dashed #9C9A9C; color:#006939;}
+.canshu { background:#E7E7EF;}
+.red{ color:#d60000;}
+.green{ color:#006939;}
+.fanhui{ border-bottom:1px dashed #9C9A9C;}
+.lizi{ border-bottom:1px dashed #9C9A9C;}
+</style></head><body>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="copyContent"></a>
+copyContent - 读取到剪切板
+</td></tr><tr><th>命令功能：</th><td>
+从指定文件中复制内容到剪切板（会将 | 替换为换行符）
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，文本路径
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+整型，成功抓取了多少行文本
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Msgbox lib.hps.copyContent("D:\DATA\log.txt")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="repeatDetection"></a>
+repeatDetection - 重复检测
+</td></tr><tr><th>命令功能：</th><td>
+检测参数1是否在参数2文件中有重复
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，待检测的字符串
+参数2 字符串型，文件保存路径
+</td></tr><tr><th>返回值：</th><td class="fanhui"><pre>
+有重复-false 
+无重复-true
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+repeatReault = lib.hps.repeatDetection("testStr", "D:\DATA\log.txt")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="waitColorShow"></a>
+waitColorShow - 等待颜色出现
+</td></tr><tr><th>命令功能：</th><td>
+等待一个颜色出现
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 整型，检测位置x坐标
+参数2 整型，检测位置y坐标
+参数3 字符串型，判断的颜色
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无返回值
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.waitColorShow(100, 100, "#FFFFFF")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="waitColorHide"></a>
+waitColorHide - 等待颜色消失
+</td></tr><tr><th>命令功能：</th><td>
+等待一个颜色消失
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 整型，检测位置x坐标
+参数2 整型，检测位置y坐标
+参数3 字符串型，判断的颜色
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无返回值
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.waitColorHide(100, 100, "#FFFFFF")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="getRand"></a>
+getRand - 获取随机数
+</td></tr><tr><th>命令功能：</th><td>
+获取随机整数
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 整型，随机数下限（包含
+参数2 整型，随机数上限（包含）
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无返回值
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+randNum = lib.hps.getRand(1, 5)
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="deleteFileInFolder"></a>
+deleteFileInFolder - 删除所有文件
+</td></tr><tr><th>命令功能：</th><td><pre>
+删除指定文件夹下的所有文件
+注意：该方法在删除数量大时具有可见延迟
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，需要进行内容删除的指定文件夹路径
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无返回值
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.deleteFileInFolder("D:\DATA")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="pasteTo"></a>
+pasteTo - 粘贴到
+</td></tr><tr><th>命令功能：</th><td>
+在指定位置粘贴文本
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 整型，检测位置x坐标
+参数2 整型，检测位置y坐标
+参数3 字符串型，要粘贴的文本
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无返回值
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.pasteTo(100, 100, "testStr")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="paste"></a>
+paste - 直接粘贴
+</td></tr><tr><th>命令功能：</th><td>
+直接粘贴文本
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，要粘贴的文本
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无返回值
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.paste("testStr")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="createNewFolder"></a>
+createNewFolder - 新建文件夹
+</td></tr><tr><th>命令功能：</th><td>
+新建文件夹，允许文件路径中存在尚未创建的文件夹
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，需要新建的文件夹路径
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+true-新建成功 false-新建失败
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.createNewFolder("D:\new1\new2\new3")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="createNewFile"></a>
+createNewFile - 新建文件
+</td></tr><tr><th>命令功能：</th><td>
+新建文件，允许文件路径中存在尚未创建的文件夹
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，需要新建的文件路径
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+true-新建成功 false-新建失败
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.createNewFolder("D:\new1\new2\log.txt")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="save"></a>
+save - 保存
+</td></tr><tr><th>命令功能：</th><td>
+保存数据
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，键名
+参数2 任意，保存的值
+参数3 字符串型，要保存的文件夹路径
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+true-保存成功 false-保存失败
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.save("key", "value", "D:\new1\new2")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="load"></a>
+load - 读取
+</td></tr><tr><th>命令功能：</th><td>
+读取数据
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，键名
+参数2 字符串型，保存到的文件夹路径
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+字符串型，读取到的数据
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+value = lib.hps.load("key", "D:\new1\new2")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="setFocus"></a>
+setFocus - 窗口获取焦点
+</td></tr><tr><th>命令功能：</th><td>
+使用窗口名让指定窗口获取焦点（窗口名称请使用抓抓的句柄查找功能获取）
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 字符串型，窗口名
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call lib.hps.setFocus("窗口名 - UC浏览器")
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="colorShow"></a>
+colorShow - 颜色判断
+</td></tr><tr><th>命令功能：</th><td>
+判断指定点是否出现给定的多个颜色
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 整型，指定点x坐标
+参数2 整型，指定点y坐标
+参数3 数组，给定的多个颜色
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+true-颜色出现 false-颜色没出现
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+colors = Array("FFFFF0", "FFFF00", "FFF000")
+result = lib.hps.colorShow(1, 1, colors)
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="ts">
+<tr><th width="100px">命令名称：</th><td class="name">
+<a name="selectPic"></a>
+selectPic - 选择图片
+</td></tr><tr><th>命令功能：</th><td>
+打开选择图片对话框并选择图片
+</td></tr><tr><th>命令参数：</th><td class="canshu"><pre>
+参数1 整型，能打开选择图片对话框的x坐标
+参数2 整型，能打开选择图片对话框的y坐标
+参数3 字符串，图片地址
+</td></tr><tr><th>返回值：</th><td class="fanhui">
+无
+</td></tr><tr><th>脚本例子：
+</th><td class="lizi"><pre>
+Call Lib.hps.selectPic(100, 100, "D:\DATA\pic.jpg")
+</td></tr>
+</table>
+
+</body>
+</html>

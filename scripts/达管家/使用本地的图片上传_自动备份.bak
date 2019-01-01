@@ -1,0 +1,187 @@
+[General]
+SyntaxVersion=2
+BeginHotkey=51
+BeginHotkeyMod=2
+PauseHotkey=0
+PauseHotkeyMod=0
+StopHotkey=123
+StopHotkeyMod=0
+RunOnce=1
+EnableWindow=
+MacroID=c7323513-37d3-45e3-ab3c-0d62dced7356
+Description=使用本地的图片上传_自动备份_自动备份
+Enable=1
+AutoRun=0
+[Repeat]
+Type=0
+Number=1
+[SetupUI]
+Type=2
+QUI=
+[Relative]
+SetupOCXFile=
+[Comment]
+
+[Script]
+//空白处
+nothingX = 174
+nothingY = 385
+//宝贝图2上传
+Pic2X = 471
+pic2Y = 797
+//宝贝图3上传
+Pic3X = 472
+pic3Y = 830
+//介绍配图上传
+introducePicX = 567
+introducePicY = 766
+//介绍配图2上传
+introduce2PicX = 580
+introduce2PicY = 854
+//白底图上传
+mainPicX = 738
+mainPicY = 462
+//宝贝图1复制主图
+Pic1CopyX = 562
+pic1CopyY = 862
+//白底图复制主图
+mainPicCopyX = 736
+mainPicCopyY = 832
+
+MoveTo nothingX, nothingY
+LeftClick 1
+MouseWheel 26
+Delay 500
+
+MouseWheel - 1 
+Delay 200
+MoveTo Pic2X, pic2Y//宝贝图2上传
+LeftClick 1
+Do
+	IfColor 386,398 , "5CB85C", 1 Then
+        Delay 100
+    Else 
+    	Exit Do    
+    End If
+Loop
+MoveTo 386,398//绿色上传
+LeftClick 1
+
+Delay 1000
+Hwnd = Plugin.Window.GetKeyFocusWnd()
+Call Plugin.Bkgnd.SendString(Hwnd, "D:\DATA\资源猎手\pic2.jpg")
+MoveTo 730,562//确认选择图片
+LeftClick 1
+
+Call waitUpdateCompelete
+
+MoveTo Pic3X, Pic3Y//宝贝图3上传
+LeftClick 1
+Do
+	IfColor 386,398 , "5CB85C", 1 Then
+       	Delay 100
+     	Else 
+    		Exit Do
+    	End If
+Loop
+MoveTo 386,398
+LeftClick 1
+
+Delay 500
+Hwnd = Plugin.Window.GetKeyFocusWnd()
+Call Plugin.Bkgnd.SendString(Hwnd, "D:\DATA\资源猎手\pic3.jpg")
+MoveTo 730,562//确认选择图片
+LeftClick 1
+
+Call waitUpdateCompelete
+EndScript 
+MoveTo nothingX,nothingY
+LeftClick 1
+MouseWheel - 10
+Delay 200
+Call Plugin.Msg.Tips("请选择补充1配图")
+MoveTo introducePicX, introducePicY//介绍配图上传
+LeftClick 1
+Do
+	IfColor 386,398 , "5CB85C", 1 Then
+       	Delay 100
+     	Else 
+    		Exit Do
+    	End If
+Loop
+MoveTo 386,398
+LeftClick 1
+
+Call waitUpdateCompelete
+
+MoveTo nothingX,nothingY
+LeftClick 1
+MouseWheel - 5
+Delay 300
+Call Plugin.Msg.Tips("请选择补充2配图")
+MoveTo introduce2PicX, introduce2PicY//介绍配图2上传
+LeftClick 1
+Do
+	IfColor 386,398 , "5CB85C", 1 Then
+       	Delay 100
+     	Else 
+    		Exit Do
+    	End If
+Loop
+MoveTo 386,398
+LeftClick 1
+
+Call waitUpdateCompelete
+
+MoveTo nothingX,nothingY
+LeftClick 1
+MouseWheel 16
+Delay 200
+Call Plugin.Msg.Tips("请选择白底图")
+MoveTo mainPicX, mainPicY//白底图上传
+LeftClick 1
+Do
+	IfColor 386,398 , "5CB85C", 1 Then
+       	Delay 100
+     	Else 
+    		Exit Do
+    	End If
+Loop
+MoveTo 386,398
+LeftClick 1
+
+Call waitUpdateCompelete
+
+MoveTo Pic1CopyX, Pic1CopyY//宝贝图1复制主图
+LeftClick 1
+MouseWheel -3
+Delay 200
+MoveTo mainPicCopyX, mainPicCopyY //白底图复制主图
+LeftClick 1
+
+MouseWheel -27
+Delay 200
+MoveTo 642, 376
+LeftClick 1
+
+MoveTo 692, 900
+
+EndScript
+
+Function waitUpdateCompelete()//等待上传完成-返回最初界面
+	Call Plugin.Msg.Tips("in")
+	Do
+		IfColor 721,569 , "E1E1E1", 0 Then
+       		Delay 100
+     	Else 
+    		Exit Do
+    	End If
+	Loop
+	Do
+		IfColor 386,398 , "449D44", 0 Then
+       		Delay 100
+     	Else 
+    		Exit Do
+    	End If
+	Loop
+End Function

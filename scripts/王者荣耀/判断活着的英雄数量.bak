@@ -1,0 +1,153 @@
+[General]
+SyntaxVersion=2
+BeginHotkey=121
+BeginHotkeyMod=0
+PauseHotkey=0
+PauseHotkeyMod=0
+StopHotkey=123
+StopHotkeyMod=0
+RunOnce=1
+EnableWindow=
+MacroID=1b5a2bd1-2125-4d1d-88e5-da1bb562d3eb
+Description=判断活着的英雄数量_自动备份
+Enable=1
+AutoRun=0
+[Repeat]
+Type=0
+Number=1
+[SetupUI]
+Type=2
+QUI=
+[Relative]
+SetupOCXFile=
+[Comment]
+
+[Script]
+firstDeleteX = 1407
+firstDeleteY = 260
+openHeroSeleteX = 622
+openHeroSeleteY = 534
+firstHeroX = 393
+firstHeroY = 326
+deleteConfirmY = -8
+nextDeleteY = 117
+nextHeroX = 132
+nextHeroY = 140
+nowX = firstDeleteX
+nowY = firstDeleteY
+liveHero = 0
+
+For 3
+	IfColor nowX, nowY,"FFFFFE",0 Then
+		liveHero = liveHero + 1
+		nowY = nowY + nextDeleteY
+	Else 
+		Exit For
+	End If
+Next
+
+Select Case liveHero
+	Case 3
+		Call Plugin.Msg.Tips("仨英雄都活着！")
+	Case 2
+		Call Plugin.Msg.Tips("有一个英雄已经凉了")
+		selectHero(1)
+	Case 1
+		Call Plugin.Msg.Tips("英雄凉了俩了")
+		selectHero(2)
+	Case Else
+		Call Plugin.Msg.Tips("都凉了")
+		selectHero(3)
+End Select
+
+EndScript
+
+Function selectHero(needHeroNum)
+	//从本地读取usedHero
+	isFile = Plugin.File.IsFileExist("D:\temp.txt")
+	If isFile Then 
+		usedHero = Lib.文件.读取指定行文本内容("D:\temp.txt", 1)
+	Else 
+		saveUsedHero(0)
+		usedHero = 0
+	End If
+	
+	MoveTo openHeroSeleteX, openHeroSeleteY
+	LeftClick 1
+	
+	foundHeroPos (usedHero)
+	
+	For needHeroNum
+		Delay 500
+		LeftClick 1
+		heroX = getNextHeroX(usedHero)
+		heroY = getNextHeroY(usedHero)
+		MoveTo heroX, heroY
+		usedHero = usedHero + 1
+	Next
+	
+	//saveUsedHero(usedHero)
+End Function
+
+Function saveUsedHero(heroNum)
+	handle = Plugin.File.OpenFile("D:\temp.txt")
+	Call Plugin.File.SeekFile(handle,0)
+	Call Plugin.File.WriteFile(handle, heroNum)
+	Call Plugin.File.CloseFile(handle)
+End Function
+
+Function foundHeroPos(usedHero)
+	nextHeroX = 132
+	nextHeroY = 140
+	uesdHeroX = firstHeroX
+	uesdHeroY = firstHeroY
+	
+	i = 1
+	For 4
+		j = 1
+		For 8
+			If (((i - 1) * 8) + j) = (usedHero + 1) Then 
+				MoveTo uesdHeroX, uesdHeroY
+				Exit Function 
+			End If
+			uesdHeroX = uesdHeroX + nextHeroX
+			j = j + 1
+		Next
+		uesdHeroX = firstHeroX
+		uesdHeroY = uesdHeroY + nextHeroY
+		i = i + 1
+	Next
+	
+End Function
+
+Function getNextHeroX(usedHero)
+	uesdHeroX = firstHeroX
+	uesdHeroY = firstHeroY
+	
+	For 4
+		For 8
+			MoveTo uesdHeroX, uesdHeroY
+			uesdHeroX = uesdHeroX + nextHeroX
+			WaitKey 
+		Next
+		uesdHeroX = firstHeroX
+		uesdHeroY = uesdHeroY + nextHeroY
+		MoveTo uesdHeroX, uesdHeroY
+	Next
+End Function
+
+Function getNextHeroY(usedHero)
+	uesdHeroX = firstHeroX
+	uesdHeroY = firstHeroY
+	
+	For 4
+		For 8
+			MoveTo uesdHeroX, uesdHeroY
+			uesdHeroX = uesdHeroX + nextHeroX
+			WaitKey 
+		Next
+		uesdHeroX = firstHeroX
+		uesdHeroY = uesdHeroY + nextHeroY
+		MoveTo uesdHeroX, uesdHeroY
+	Next
+End Function
